@@ -12,6 +12,7 @@ class Register extends Component {
       password2: "",
       errors: {},
     };
+
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -19,6 +20,7 @@ class Register extends Component {
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+
   onSubmit(e) {
     e.preventDefault();
 
@@ -28,7 +30,6 @@ class Register extends Component {
       password: this.state.password,
       password2: this.state.password2,
     };
-    console.log(newUser);
 
     axios
       .post("http://127.0.0.1:5000/api/users/register", newUser)
@@ -45,6 +46,7 @@ class Register extends Component {
 
   render() {
     const { errors } = this.state;
+
     return (
       <div className="register">
         <div className="container">
@@ -54,7 +56,7 @@ class Register extends Component {
               <p className="lead text-center">
                 Create your DevConnector account
               </p>
-              <form action="create-profile.html" onSubmit={this.onSubmit}>
+              <form noValidate onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
                     type="text"
@@ -74,8 +76,8 @@ class Register extends Component {
                   <input
                     type="email"
                     className={classnames("form-control form-control-lg", {
-                        "is-invalid": errors.email,
-                      })}
+                      "is-invalid": errors.email,
+                    })}
                     placeholder="Email Address"
                     name="email"
                     value={this.state.email}
@@ -84,7 +86,7 @@ class Register extends Component {
                   {errors.email && (
                     <div className="invalid-feedback">{errors.email}</div>
                   )}
-                  <small classNameName="form-text text-muted">
+                  <small className="form-text text-muted">
                     This site uses Gravatar so if you want a profile image, use
                     a Gravatar email
                   </small>
@@ -93,8 +95,8 @@ class Register extends Component {
                   <input
                     type="password"
                     className={classnames("form-control form-control-lg", {
-                        "is-invalid": errors.password,
-                      })}
+                      "is-invalid": errors.password,
+                    })}
                     placeholder="Password"
                     name="password"
                     value={this.state.password}
@@ -108,8 +110,8 @@ class Register extends Component {
                   <input
                     type="password"
                     className={classnames("form-control form-control-lg", {
-                        "is-invalid": errors.password2,
-                      })}
+                      "is-invalid": errors.password2,
+                    })}
                     placeholder="Confirm Password"
                     name="password2"
                     value={this.state.password2}
@@ -128,4 +130,5 @@ class Register extends Component {
     );
   }
 }
+
 export default Register;
