@@ -2,8 +2,29 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
-
+const cors = require("cors");
 const app = express();
+const hpp = require('hpp');
+const helmet = require('helmet');
+const xss = require('xss-clean');
+const cookieParser = require('cookie-parser');
+const mongoSanitize = require('express-mongo-sanitize');
+
+
+
+// cookie parser
+app.use(cookieParser());
+
+// Sanitize data
+app.use(mongoSanitize());
+
+// Set security headers
+app.use(helmet());
+
+// Prevent XSS attacks
+app.use(xss());
+
+
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -26,10 +47,12 @@ mongoose
     useNewUrlParser: true,
   })
   .then(() => console.log("Connected to MongoDB"));
-app.get("/", (res, req) => res.end("Hello"));
 
 // Passport middleware
 app.use(passport.initialize());
+
+//CORS
+app.use(cors());
 
 // Passport Config
 require("./config/passport")(passport);
@@ -39,7 +62,7 @@ app.use("/api/users", users);
 app.use("/api/profile", profile);
 app.use("/api/posts", posts);
 
-const port = process.env.PORT || 5000;
+const port = 5000;
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}!`);

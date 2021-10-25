@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class Register extends Component {
   constructor() {
@@ -17,23 +18,28 @@ class Register extends Component {
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
-  onSubmit(e){
-      e.preventDefault();
+  onSubmit(e) {
+    e.preventDefault();
 
-      const newUser = {
-          name: this.state.name,
-          email: this.state.email,
-          password: this.state.password,
-          password2: this.state.password2,
-      }
-      console.log(newUser);
+    const newUser = {
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+      password2: this.state.password2,
+    };
+    console.log(newUser);
 
-      this.setState({
-          name:"",
-          email:"",
-          password:"",
-          password2:"",
-      })
+    axios
+      .post("http://127.0.0.1:5000/api/users/register", newUser)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
+
+    // this.setState({
+    //   name: "",
+    //   email: "",
+    //   password: "",
+    //   password2: "",
+    // });
   }
 
   render() {
@@ -43,7 +49,9 @@ class Register extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Sign Up</h1>
-              <p className="lead text-center">Create your DevConnector account</p>
+              <p className="lead text-center">
+                Create your DevConnector account
+              </p>
               <form action="create-profile.html" onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
@@ -53,7 +61,6 @@ class Register extends Component {
                     name="name"
                     value={this.state.name}
                     onChange={this.onChange}
-                    required
                   />
                 </div>
                 <div className="form-group">
