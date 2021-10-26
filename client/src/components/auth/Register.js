@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import classnames from "classnames";
-
 import { withRouter } from "react-router-dom";
+import classnames from "classnames";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 
@@ -19,6 +18,12 @@ class Register extends Component {
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -40,18 +45,8 @@ class Register extends Component {
       password: this.state.password,
       password2: this.state.password2,
     };
-    this.props.registerUser(newUser, this.props.history);
-    // axios
-    //   .post("http://127.0.0.1:5000/api/users/register", newUser)
-    //   .then((res) => console.log(res.data))
-    //   .catch((err) => console.log(err));
 
-    // this.setState({
-    //   name: "",
-    //   email: "",
-    //   password: "",
-    //   password2: "",
-    // });
+    this.props.registerUser(newUser, this.props.history);
   }
 
   render() {

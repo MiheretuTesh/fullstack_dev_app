@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
 import { loginUser } from "../../actions/authActions";
+
 class Login extends Component {
   constructor() {
     super();
@@ -11,9 +12,11 @@ class Login extends Component {
       password: "",
       errors: {},
     };
+
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/dashboard");
@@ -47,6 +50,7 @@ class Login extends Component {
 
   render() {
     const { errors } = this.state;
+
     return (
       <div className="login">
         <div className="container">
