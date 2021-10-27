@@ -69,7 +69,7 @@ export const addEducation = (eduData, history) => dispatch => {
 // Delete Experience
 export const deleteExperience = id => dispatch => {
   axios
-    .delete(`/api/profile/experience/${id}`)
+    .delete(`http://127.0.0.1:5000/api/profile/experience/${id}`)
     .then(res =>
       dispatch({
         type: GET_PROFILE,
