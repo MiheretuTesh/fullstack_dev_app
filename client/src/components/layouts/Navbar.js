@@ -11,7 +11,6 @@ class Navbar extends Component {
     e.preventDefault();
     this.props.clearCurrentProfile();
     this.props.logoutUser();
-    
   }
 
   render() {
@@ -19,6 +18,11 @@ class Navbar extends Component {
 
     const authLinks = (
       <ul className="navbar-nav ml-auto">
+        <li className="nav-item">
+          <Link className="nav-link" to="/feed">
+            Post Feeds
+          </Link>
+        </li>
         <li className="nav-item">
           <Link className="nav-link" to="/dashboard">
             Dhashboard

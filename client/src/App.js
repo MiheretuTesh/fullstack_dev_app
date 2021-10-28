@@ -24,6 +24,9 @@ import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/profile/Profile";
 import NotFound from "./components/not-found/NotFound";
 
+//POST
+import Posts from "./components/posts/Posts";
+
 import "./App.css";
 
 // Check for token
@@ -91,6 +94,7 @@ class App extends Component {
                   component={AddEducation}
                 />
               </Switch>
+              <Route exact path="/feed" component={Posts} />
               <Route exact path="/not-found" component={NotFound} />
             </div>
             <Footer />
