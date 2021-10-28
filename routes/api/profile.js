@@ -54,7 +54,7 @@ router.get("/all", (req, res) => {
         return res.status(404).json(errors);
       }
 
-      res.json({ count: profiles.length, profiles });
+      res.json(profiles);
     })
     .catch((err) => res.status(404).json({ profile: "There are no profiles" }));
 });
